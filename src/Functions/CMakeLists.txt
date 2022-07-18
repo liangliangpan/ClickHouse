@@ -99,6 +99,12 @@ add_subdirectory(JSONPath)
 # Signed integer overflow on user-provided data inside boost::geometry - ignore.
 set_source_files_properties("pointInPolygon.cpp" PROPERTIES COMPILE_FLAGS -fno-sanitize=signed-integer-overflow)
 
+if (ARCH_AMD64)
+    # Clang's autovectorization with AVX enabled deteriorates performance compared to autovectorization with SSE
+    set(DISABLE_AVX_SRCS FunctionsConversion.cpp FunctionsLogical.cpp modulo.cpp)
+    set_source_files_properties(${DISABLE_AVX_SRCS} PROPERTIES COMPILE_FLAGS "-mno-avx")
+endif()
+
 if (ENABLE_FUZZING)
     add_compile_definitions(FUZZING_MODE=1)
 endif ()
