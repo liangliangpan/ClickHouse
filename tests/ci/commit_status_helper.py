@@ -75,7 +75,7 @@ def post_labels(gh, pr_info, labels_names):
         pull_request.add_to_labels(label)
 
 
-def fail_simple_check(gh, pr_info, description)
+def fail_simple_check(gh, pr_info, description):
     if SKIP_SIMPLE_CHECK_LABEL in pr_info.labels:
         return
     url = (
