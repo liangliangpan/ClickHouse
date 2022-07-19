@@ -6,7 +6,6 @@ import csv
 from env_helper import GITHUB_REPOSITORY, GITHUB_RUN_URL
 from ci_config import CI_CONFIG
 from pr_info import SKIP_SIMPLE_CHECK_LABEL
-from rerun_helper import RerunHelper
 
 RETRY = 5
 
@@ -90,12 +89,13 @@ def fail_simple_check(gh, pr_info, description):
 
 
 def create_simple_check(gh, pr_info):
-    rerun_helper = RerunHelper(gh, pr_info, "Simple Check")
-    if rerun_helper.get_finished_status() is None:
-        commit = get_commit(gh, pr_info.sha)
-        commit.create_status(
-            context="Simple Check",
-            description="Skipped",
-            state="success",
-            target_url=GITHUB_RUN_URL,
-        )
+    commit = get_commit(gh, pr_info.sha)
+    for status in commit.get_statuses():
+        if "Simple Check" in status.context:
+            return
+    commit.create_status(
+        context="Simple Check",
+        description="Skipped",
+        state="success",
+        target_url=GITHUB_RUN_URL,
+    )
