@@ -10,17 +10,14 @@ from github import Github
 from env_helper import (
     RUNNER_TEMP,
     GITHUB_WORKSPACE,
-    GITHUB_REPOSITORY,
-    GITHUB_SERVER_URL,
 )
 from s3_helper import S3Helper
-from pr_info import PRInfo, SKIP_SIMPLE_CHECK_LABEL
+from pr_info import PRInfo
 from get_robot_token import get_best_robot_token
 from upload_result_helper import upload_results
 from docker_pull_helper import get_image_with_version
 from commit_status_helper import (
     post_commit_status,
-    get_commit,
     fail_simple_check,
 )
 from clickhouse_helper import (
