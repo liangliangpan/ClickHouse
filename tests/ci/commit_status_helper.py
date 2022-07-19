@@ -92,6 +92,7 @@ def fail_simple_check(gh, pr_info, description):
 def create_simple_check(gh, pr_info):
     rerun_helper = RerunHelper(gh, pr_info, "Simple Check")
     if rerun_helper.get_finished_status() is None:
+        commit = get_commit(gh, pr_info.sha)
         commit.create_status(
             context="Simple Check",
             description="Skipped",
