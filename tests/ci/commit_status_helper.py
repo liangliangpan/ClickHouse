@@ -3,7 +3,7 @@
 import time
 import os
 import csv
-from env_helper import GITHUB_REPOSITORY
+from env_helper import GITHUB_REPOSITORY, GITHUB_SERVER_URL
 from ci_config import CI_CONFIG
 
 RETRY = 5
@@ -73,3 +73,19 @@ def post_labels(gh, pr_info, labels_names):
     pull_request = repo.get_pull(pr_info.number)
     for label in labels_names:
         pull_request.add_to_labels(label)
+
+
+def fail_simple_check(gh, pr_info, description)
+    if SKIP_SIMPLE_CHECK_LABEL in pr_info.labels:
+        return
+    url = (
+        f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/"
+        "blob/master/.github/PULL_REQUEST_TEMPLATE.md?plain=1"
+    )
+    commit = get_commit(gh, pr_info.sha)
+    commit.create_status(
+        context="Simple Check",
+        description=description,
+        state="failed",
+        target_url=url,
+    )
