@@ -3,7 +3,6 @@ import sys
 import logging
 import re
 from typing import Tuple
-from rerun_helper import RerunHelper
 
 from github import Github
 
@@ -224,14 +223,7 @@ if __name__ == "__main__":
     if pr_labels_to_remove:
         remove_labels(gh, pr_info, pr_labels_to_remove)
 
-    rerun_helper = RerunHelper(gh, pr_info, "Simple Check")
-    if rerun_helper.get_finished_status() is None:
-        commit.create_status(
-            context="Simple Check",
-            description="Skipped",
-            state="success",
-            target_url=GITHUB_RUN_URL,
-        )
+    create_simple_check(gh, pr_info)
 
     if description_error:
         print(
