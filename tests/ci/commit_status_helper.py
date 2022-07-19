@@ -5,6 +5,7 @@ import os
 import csv
 from env_helper import GITHUB_REPOSITORY, GITHUB_SERVER_URL
 from ci_config import CI_CONFIG
+from pr_info import SKIP_SIMPLE_CHECK_LABEL
 
 RETRY = 5
 
