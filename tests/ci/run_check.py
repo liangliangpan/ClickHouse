@@ -6,7 +6,12 @@ from typing import Tuple
 
 from github import Github
 
-from commit_status_helper import get_commit, post_labels, remove_labels
+from commit_status_helper import (
+    get_commit,
+    post_labels,
+    remove_labels,
+    create_simple_check,
+)
 from env_helper import GITHUB_RUN_URL, GITHUB_REPOSITORY, GITHUB_SERVER_URL
 from get_robot_token import get_best_robot_token
 from pr_info import FORCE_TESTS_LABEL, PRInfo
