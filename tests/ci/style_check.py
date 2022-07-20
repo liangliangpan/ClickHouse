@@ -124,7 +124,7 @@ if __name__ == "__main__":
     )
     ch_helper.insert_events_into(db="default", table="checks", events=prepared_events)
 
-    if state == "error":
+    if state in ["error", "failure"]:
         if SKIP_SIMPLE_CHECK_LABEL not in pr_info.labels:
             url = (
                 f"{GITHUB_SERVER_URL}/{GITHUB_REPOSITORY}/"
