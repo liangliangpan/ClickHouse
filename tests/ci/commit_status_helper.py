@@ -83,7 +83,7 @@ def fail_simple_check(gh, pr_info, description):
     commit.create_status(
         context="Simple Check",
         description=description,
-        state="failed",
+        state="failure",
         target_url=GITHUB_RUN_URL,
     )
 
