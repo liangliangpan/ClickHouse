@@ -40,5 +40,5 @@ class RerunHelper:
     def get_finished_status(self):
         for status in self.statuses:
             if self.check_name in status.context:
-                return status.state
+                return status
         return None
