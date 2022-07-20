@@ -125,6 +125,6 @@ if __name__ == "__main__":
     )
     ch_helper.insert_events_into(db="default", table="checks", events=prepared_events)
 
-    if state == "error":
+    if state in ["error", "failure"]:
         fail_simple_check(gh, pr_info, f"{NAME} failed")
         sys.exit(1)
